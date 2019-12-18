@@ -3,39 +3,19 @@ kind: StatefulSet
 apiVersion: apps/v1
 metadata:
   name: kafka
-selector:
-  matchLabels:
-    name: kafka
+  labels:
+    app: kafka
 spec:
   serviceName: kafka-service
   replicas: 3
+  selector:
+    matchLabels:
+      app: kafka
   template:
     metadata:
       labels:
         app: kafka
     spec:
-      affinity:
-        podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            - labelSelector:
-                matchExpressions:
-                  - key: "app"
-                    operator: In
-                    values:
-                  - kafka
-              topologyKey: "kubernetes.io/hostname"
-        podAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-            - weight: 1
-              podAffinityTerm:
-                labelSelector:
-                  matchExpressions:
-                    - key: "app"
-                      operator: In
-                      values:
-                    - zookeeper0
-                topologyKey: "kubernetes.io/hostname"
-      terminationGracePeriodSeconds: 300
       containers:
         - name: kafka
           image: wurstmeister/kafka
@@ -51,9 +31,10 @@ spec:
               mountPath: /var/lib/kafka
   volumeClaimTemplates:
     - metadata:
-      name: data
+        name: data
       spec:
-        accessModes: ["ReadWriteOnce"]
+        accessModes:
+          - ReadWriteOnce
         resources:
           requests:
             storage: 10Gi
