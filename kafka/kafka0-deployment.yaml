@@ -1,8 +1,11 @@
 ---
 kind: Deployment
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1 
 metadata:
   name: kafka0
+selector:
+    matchLabels:
+      name: kafka0 
 spec:
   template:
     metadata:

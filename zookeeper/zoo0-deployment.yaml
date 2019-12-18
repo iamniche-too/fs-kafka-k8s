@@ -2,16 +2,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: zoo1
+  name: zoo0
 spec:
   replicas: 1
   selector:
     matchLabels:
-      name: zookeeper-1
+      name: zookeeper0
   template:
     metadata:
       labels:
-        name: zookeeper-1
+        name: zookeeper0
     spec:
       hostname: zoo1
       containers:
@@ -21,22 +21,22 @@ spec:
             - containerPort: 2181
           env:
             - name: ZOO_MY_ID
-              value: "1"
+              value: "0"
             - name: ZOO_PORT
               value: "2181"
             - name: ZOO_SERVERS
-              value: server.1=zoo1:2888:3888
+              value: server.1=zoo0:2888:3888
           resources: {}
           volumeMounts:
             - mountPath: /data
-              name: zoo1-claim0
+              name: zoo0-claim0
             - mountPath: /datalog
-              name: zoo1-claim1
+              name: zoo0-claim1
       volumes:
-        - name: zoo1-claim0
+        - name: zoo0-claim0
           persistentVolumeClaim:
-            claimName: zoo1-claim0
+            claimName: zoo0-claim0
         - name: zoo1-claim1
           persistentVolumeClaim:
-            claimName: zoo1-claim1
+            claimName: zoo0-claim1
 status: {}
