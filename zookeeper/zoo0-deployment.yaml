@@ -36,7 +36,7 @@ spec:
         - name: zoo0-claim0
           persistentVolumeClaim:
             claimName: zoo0-claim0
-        - name: zoo1-claim1
+        - name: zoo0-claim1
           persistentVolumeClaim:
             claimName: zoo0-claim1
 status: {}
