@@ -31,6 +31,9 @@ spec:
           volumeMounts:
             - name: data
               mountPath: /var/lib/kafka
+          resources:
+          requests:
+            memory: "500m"
   volumeClaimTemplates:
     - metadata:
         name: data
