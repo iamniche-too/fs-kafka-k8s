@@ -5,8 +5,9 @@ Getting started with Kafka on (local) K8S.
 #QuickStart
 
 Install minikube then
-`$> minikube start
-...
+
+`$> minikube start\n
+...\n
 🏄  Done! kubectl is now configured to use "minikube"`
 
 `$> cd fs-kafka-k8s
