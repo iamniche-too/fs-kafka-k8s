@@ -32,8 +32,8 @@ spec:
             - name: data
               mountPath: /var/lib/kafka
           resources:
-          requests:
-            memory: "500m"
+            requests:
+              memory: "500m"
   volumeClaimTemplates:
     - metadata:
         name: data
