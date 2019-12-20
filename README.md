@@ -6,12 +6,14 @@ Getting started with Kafka on (local) K8S.
 
 Install minikube then
 
-```$> minikube start\n
+```
+$> minikube start\n
 ...
 🏄  Done! kubectl is now configured to use "minikube"
 ```
 
-```$> cd fs-kafka-k8s
+```
+$> cd fs-kafka-k8s
 $> ./deploy_all.sh
 service/zoo0 created
 persistentvolumeclaim/zoo0-claim0 created
@@ -25,7 +27,8 @@ This will start both the Zookeeper instance and 3x Kafka brokers.
 
 Ensure it is all running correctly using:
 
-```$> kubectl get pods
+```
+$> kubectl get pods
 NAME                    READY   STATUS    RESTARTS   AGE
 kafka-0                 1/1     Running   1          15s
 kafka-1                 1/1     Running   0          11s
