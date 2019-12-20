@@ -12,6 +12,11 @@ $> minikube start\n
 🏄  Done! kubectl is now configured to use "minikube"
 ```
 
+Enable the metrics server
+```
+$> minikube addons enable metrics-server 
+```
+
 ```
 $> cd fs-kafka-k8s
 $> ./deploy_all.sh

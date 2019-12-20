@@ -7,7 +7,7 @@ metadata:
     app: kafka
 spec:
   serviceName: kafka-service
-  replicas: 3
+  replicas: 3 
   selector:
     matchLabels:
       app: kafka
@@ -16,6 +16,25 @@ spec:
       labels:
         app: kafka
     spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values: ["kafka"]
+              topologyKey: "kubernetes.io/hostname"
+        podAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              podAffinityTerm:
+                labelSelector:
+                   matchExpressions:
+                     - key: app
+                       operator: In
+                       values: ["zoo0"]
+                topologyKey: "kubernetes.io/hostname"
       containers:
         - name: kafka
           image: wurstmeister/kafka
@@ -33,7 +52,7 @@ spec:
               mountPath: /var/lib/kafka
           resources:
             requests:
-              memory: "500m"
+              memory: "1Gi"
   volumeClaimTemplates:
     - metadata:
         name: data
