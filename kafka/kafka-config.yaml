@@ -1,0 +1,29 @@
+kind: ConfigMap
+metadata:
+  name: kafka-config
+apiVersion: v1
+data:
+
+  generate-config.sh: |-
+    #!/bin/bash
+    set -e
+    set -x
+
+    KAFKA_BROKER_ID=${HOSTNAME##*-}
+
+    OUTSIDE_HOST=$(kubectl get node "$NODE_NAME" -o jsonpath='{.status.addresses[?(@.type=="InternalIP")].address}')
+
+    OUTSIDE_PORT=$((32400 + ${KAFKA_BROKER_ID}))
+
+    KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://$(OUTSIDE_HOST):$(OUTSIDE_PORT)
+
+    SEDS=("s|@ADVERTISED_LISTENERS@|advertised.listeners=PLAINTEXT://:9092,OUTSIDE://${KAFKA_ADVERTISED_LISTENERS}|")
+
+    printf '%s\n' "${SEDS[@]}" | sed -f - /etc/kafka-config/server.properties > /etc/kafka-config/server.properties.updated
+
+  server.properties: |-
+    # Hostname and port the broker will advertise to producers and consumers. If not set, 
+    # it uses the value for "listeners" if configured.  Otherwise, it will use the value
+    # returned from java.net.InetAddress.getCanonicalHostName().
+    @ADVERTISED_LISTENERS@ 
+

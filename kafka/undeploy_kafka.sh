@@ -1,3 +1,7 @@
+kubectl delete -f kafka-config.yaml
+kubectl delete -f kafka0-external-service.yaml
+kubectl delete -f kafka1-external-service.yaml
+kubectl delete -f kafka2-external-service.yaml
 kubectl delete -f kafka-headless-service.yaml
 kubectl delete -f kafka-statefulset.yaml
 kubectl delete persistentvolumeclaim data-kafka-0 
