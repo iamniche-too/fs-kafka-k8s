@@ -1,6 +1,7 @@
 kind: ConfigMap
 metadata:
   name: kafka-config
+  namespace: kafka
 apiVersion: v1
 data:
 
@@ -15,11 +16,13 @@ data:
 
     OUTSIDE_PORT=$((32400 + ${KAFKA_BROKER_ID}))
 
-    KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://$(OUTSIDE_HOST):$(OUTSIDE_PORT)
+    KAFKA_ADVERTISED_LISTENERS=OUTSIDE://${OUTSIDE_HOST}:${OUTSIDE_PORT}
 
-    SEDS=("s|@ADVERTISED_LISTENERS@|advertised.listeners=PLAINTEXT://:9092,OUTSIDE://${KAFKA_ADVERTISED_LISTENERS}|")
+    SEDS=("s|@ADVERTISED_LISTENERS@|advertised.listeners=PLAINTEXT://:9092,${KAFKA_ADVERTISED_LISTENERS}|")
 
-    printf '%s\n' "${SEDS[@]}" | sed -f - /etc/kafka-config/server.properties > /etc/kafka-config/server.properties.updated
+    printf '\n%s\n' "${SEDS[@]}" | sed -f - /etc/kafka-config-ro/server.properties > /etc/kafka-config-rw/server.properties.snippet
+
+    cat /etc/kafka-config-rw/server.properties.snippet >> /opt/kafka/config/server.properties
 
   server.properties: |-
     # Hostname and port the broker will advertise to producers and consumers. If not set, 

@@ -3,6 +3,7 @@ kind: StatefulSet
 apiVersion: apps/v1
 metadata:
   name: kafka
+  namespace: kafka
   labels:
     app: kafka
 spec:
@@ -18,24 +19,18 @@ spec:
     spec:
       initContainers:
         - name: init-config
-          image: solsson/kafka-initutils@sha256:f6d9850c6c3ad5ecc35e717308fddb47daffbde18eb93e98e031128fe8b899ef
+          image: nichemley/fs-kafka-config-image 
           env:
             - name: NODE_NAME
               valueFrom:
                 fieldRef:
                   fieldPath: spec.nodeName
-            - name: POD_NAME
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.name
-            - name: POD_NAMESPACE
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.namespace
-          command: ['/bin/bash', '/etc/kafka-config/generate-config.sh']
+          command: ['/bin/bash', '/etc/kafka-config-ro/generate-config.sh']
           volumeMounts:
-          - name: kafka-config-volume
-            mountPath: /etc/kafka-config
+          - name: kafka-config-volume-ro
+            mountPath: /etc/kafka-config-ro
+          - name: kafka-config-volume-rw
+            mountPath: /etc/kafka-config-rw
       #affinity:
       #  podAntiAffinity:
       #    requiredDuringSchedulingIgnoredDuringExecution:
@@ -68,17 +63,21 @@ spec:
             - name: KAFKA_BROKER_ID
               value: "-1"
           volumeMounts:
-            - name: kafka-config-volume
-              mountPath: /etc/kafka-config
+            - name: kafka-config-volume-ro
+              mountPath: /etc/kafka-config-ro
+            - name: kafka-config-volume-rw
+              mountPath: /etc/kafka-config-rw
             - name: data
               mountPath: /var/lib/kafka
           resources:
             requests:
               memory: "1Gi"
       volumes:
-        - name: kafka-config-volume
+        - name: kafka-config-volume-ro
           configMap:
             name: kafka-config
+        - name: kafka-config-volume-rw
+          emptyDir: {}
   volumeClaimTemplates:
     - metadata:
         name: data
