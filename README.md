@@ -51,7 +51,7 @@ zoo0-74f64c4578-qwb7f   1/1     Running   0          16s
 
 To send a test message to/from the brokers, use the following:
 
-...
+```
 cd ~/workspace/kafka_2.12-2.3.0/bin
 
 ./kafka-console-producer.sh --broker-list 192.168.99.108:32400,192.168.99.108:32401,192.168.99.108:32402 --topic test1
@@ -61,21 +61,29 @@ cd ~/workspace/kafka_2.12-2.3.0/bin
 ./kafka-console-consumer.sh --bootstrap-server 192.168.99.108:32400,192.168.99.108:32401,192.168.99.108:32402 --topic test1 --from-beginning
 
 This is a message
-...
+```
 
 IMPORTANT NOTE: Kafka will error with LEADER_NOT_AVAILABLE if the topic does not exist. But it still should work ;) You could always create the topic first.
 
 To used the (throttled) python consumer and producers use the following:
 
-...
+```
 cd fs-python
 source env/bin/activate
 python consumer.py (in one terminal)
 python producer.py (in another terminal)
-...
+```
 
 You should see the following output:
 
-...
+```
 Throughput in window: 75 MB/s
-...
+Throughput in window: 75 MB/s
+Throughput in window: 75 MB/s
+Throughput in window: 75 MB/s
+Throughput in window: 75 MB/s
+Throughput in window: 75 MB/s
+Throughput in window: 75 MB/s
+Throughput in window: 75 MB/s
+Throughput in window: 75 MB/s
+```
