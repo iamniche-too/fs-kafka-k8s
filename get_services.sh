@@ -1,1 +1,1 @@
-kubectl get services 
+kubectl -n kafka get services 

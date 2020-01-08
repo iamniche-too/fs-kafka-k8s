@@ -4,11 +4,11 @@ metadata:
   name: external-service-1
   namespace: kafka
 spec:
-  type: LoadBalancer
-  externalTrafficPolicy: Local
+  type: NodePort 
   selector:
     statefulset.kubernetes.io/pod-name: kafka-1
   ports:
   - protocol: TCP
-    port: 32401 
-    targetPort: 9092
+    nodePort: 32401 
+    port: 32401
+    targetPort: 9094

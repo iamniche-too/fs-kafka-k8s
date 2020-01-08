@@ -1,1 +1,1 @@
-kubectl get pods
+kubectl -n kafka get pods
