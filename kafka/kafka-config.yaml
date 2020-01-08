@@ -20,9 +20,7 @@ data:
 
     SEDS=("s|@ADVERTISED_LISTENERS@|advertised.listeners=PLAINTEXT://:9092,${KAFKA_ADVERTISED_LISTENERS}|")
 
-    printf '\n%s\n' "${SEDS[@]}" | sed -f - /etc/kafka-config-ro/server.properties > /etc/kafka-config-rw/server.properties.snippet
-
-    cat /etc/kafka-config-rw/server.properties.snippet >> /opt/kafka/config/server.properties
+    printf '\n%s\n' "${SEDS[@]}" | sed -f - /etc/kafka-config-ro/server.properties > /etc/kafka-config-rw/server.properties
 
   server.properties: |-
     # Licensed to the Apache Software Foundation (ASF) under one or more
