@@ -59,6 +59,8 @@ cd ~/workspace/kafka_2.12-2.3.0/bin
 (type) This is a message
 
 ./kafka-console-consumer.sh --bootstrap-server 192.168.99.108:32400,192.168.99.108:32401,192.168.99.108:32402 --topic test1 --from-beginning
+
+This is a message
 ...
 
 To used the (throttled) python consumer and producers use the following:
