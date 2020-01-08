@@ -63,7 +63,7 @@ cd ~/workspace/kafka_2.12-2.3.0/bin
 This is a message
 ...
 
-IMPORTANT NOTE: Kafka will error with LEADER_NOT_AVAILABLE if the topic does not exist. But it still should work ;) You could always create the topic first...
+IMPORTANT NOTE: Kafka will error with LEADER_NOT_AVAILABLE if the topic does not exist. But it still should work ;) You could always create the topic first.
 
 To used the (throttled) python consumer and producers use the following:
 
