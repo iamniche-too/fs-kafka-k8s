@@ -36,14 +36,14 @@ http://192.168.99.108:32401
 http://192.168.99.108:32402
 ```
 
-This will start both the Zookeeper instance and the Kafka brokers.
+These URLs are the Kafka broker endpoints. Make a note of them for later on.
 
-Note - when using minikube, we expose the external services using "minikube service" command and not "minikube tunnel" since the latter uses randomly assigned ports, which isn't ideal since we need static port assignments! ;)
+This will start both the Zookeeper instance and the Kafka brokers.
 
 Ensure it is all running as expected using:
 
 ```
-$> kubectl get pods
+$> kubectl -n kafka get pods
 NAME                    READY   STATUS    RESTARTS   AGE
 kafka-0                 1/1     Running   1          15s
 kafka-1                 1/1     Running   0          11s
@@ -52,6 +52,8 @@ zoo0-74f64c4578-qwb7f   1/1     Running   0          16s
 ```
 
 To send a test message to/from the brokers, use the following:
+
+Note - the IP:port list is the Kafka broker endpoints noted earlier.
 
 ```
 cd ~/workspace/kafka_2.12-2.3.0/bin
