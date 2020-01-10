@@ -14,7 +14,7 @@ $> minikube start\n
 
 ```
 $> cd fs-kafka-k8s
-$> ./deploy_all.sh
+$> ./deploy/minikube/deploy-minikube.sh
 namespace/kafka created
 clusterrole.rbac.authorization.k8s.io/node-reader created
 clusterrolebinding.rbac.authorization.k8s.io/kafka-node-reader created
@@ -29,6 +29,8 @@ poddisruptionbudget.policy/kafka-pdb created
 service/external-service-0 created
 service/external-service-1 created
 service/external-service-2 created
+
+$> ./deploy/minikube/expose-external-services.sh
 http://192.168.99.108:32400
 http://192.168.99.108:32401
 http://192.168.99.108:32402
