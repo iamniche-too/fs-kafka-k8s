@@ -1,0 +1,21 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: kafka
+
+resources:
+  - kafka-namespace.yaml
+  - kafka-cluster-role.yaml
+
+  - kafka/kafka-config.yaml
+  - kafka/kafka-headless-service.yaml
+  - kafka/kafka-statefulset.yaml
+  - kafka/kafka-pdb.yaml
+  - kafka/kafka0-external-service.yaml
+  - kafka/kafka1-external-service.yaml
+  - kafka/kafka2-external-service.yaml 
+
+  - zookeeper/zoo0-service.yaml
+  - zookeeper/zoo0-claim0-persistentvolumeclaim.yaml
+  - zookeeper/zoo0-claim1-persistentvolumeclaim.yaml
+  - zookeeper/zoo0-deployment.yaml

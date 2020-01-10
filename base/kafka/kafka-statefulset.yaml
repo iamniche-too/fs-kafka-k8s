@@ -31,25 +31,6 @@ spec:
             mountPath: /etc/kafka-config-ro
           - name: kafka-config-volume-rw
             mountPath: /etc/kafka-config-rw
-      #affinity:
-      #  podAntiAffinity:
-      #    requiredDuringSchedulingIgnoredDuringExecution:
-      #      - labelSelector:
-      #          matchExpressions:
-      #            - key: app
-      #              operator: In
-      #              values: ["kafka"]
-      #        topologyKey: "kubernetes.io/hostname"
-      #  podAffinity:
-      #    preferredDuringSchedulingIgnoredDuringExecution:
-      #      - weight: 1
-      #        podAffinityTerm:
-      #          labelSelector:
-      #             matchExpressions:
-      #               - key: app
-      #                 operator: In
-      #                 values: ["zoo0"]
-      #          topologyKey: "kubernetes.io/hostname"
       containers:
         - name: kafka
           image: wurstmeister/kafka
