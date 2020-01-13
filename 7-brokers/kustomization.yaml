@@ -1,0 +1,12 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- ../namespace
+- ../kafka
+- ../zookeeper
+- kafka/kafka3-external-service.yaml
+- kafka/kafka4-external-service.yaml
+- kafka/kafka5-external-service.yaml
+- kafka/kafka6-external-service.yaml
+patches:
+- kafka/kafka-statefulset.yaml

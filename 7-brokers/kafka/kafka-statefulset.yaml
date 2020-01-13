@@ -1,0 +1,8 @@
+---
+kind: StatefulSet
+apiVersion: apps/v1
+metadata:
+  name: kafka
+  namespace: kafka
+spec:
+  replicas: 7 
