@@ -5,8 +5,6 @@ metadata:
   namespace: kafka
 spec:
   type: NodePort
-  #type: LoadBalancer
-  #externalTrafficPolicy: Local
   selector:
     statefulset.kubernetes.io/pod-name: kafka-0
   ports:

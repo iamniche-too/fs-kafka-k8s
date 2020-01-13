@@ -1,0 +1,10 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: kafka
+
+resources:
+  - zoo0-service.yaml
+  - zoo0-claim0-persistentvolumeclaim.yaml
+  - zoo0-claim1-persistentvolumeclaim.yaml
+  - zoo0-deployment.yaml

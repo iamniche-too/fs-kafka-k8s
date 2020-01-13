@@ -1,3 +1,3 @@
-diff   <(kustomize build base)   <(kustomize build overlays/gcp) > tmp
+diff   <(kustomize build .)   <(kustomize build gcp) > tmp
 cat tmp
 rm tmp
