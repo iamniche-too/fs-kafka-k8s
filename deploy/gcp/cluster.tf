@@ -122,6 +122,8 @@ resource "google_container_cluster" "cluster" {
   timeouts {
     update = "20m"
   }
+
+  depends_on = [google_compute_subnetwork.vpc_subnetwork]
 }
 
 # https://www.terraform.io/docs/providers/google/r/container_node_pool.html
@@ -164,7 +166,7 @@ resource "google_container_node_pool" "node_pool" {
     # n1-standard-1.
     machine_type = "n1-standard-1"
 
-    service_account = "nicholas.oliver.hemley@gmail.com" 
+    service_account = google_service_account.default.email 
 
     # Size of the disk attached to each node, specified in GB. The smallest
     # allowed disk size is 10GB. Defaults to 100GB.
