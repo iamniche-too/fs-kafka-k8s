@@ -123,7 +123,9 @@ resource "google_container_cluster" "cluster" {
     update = "20m"
   }
 
-  depends_on = [google_compute_subnetwork.vpc_subnetwork]
+  depends_on = [
+    google_compute_subnetwork.vpc_subnetwork,google_service_account.default,
+  ]
 }
 
 # https://www.terraform.io/docs/providers/google/r/container_node_pool.html
@@ -140,15 +142,15 @@ resource "google_container_node_pool" "node_pool" {
   # The cluster to create the node pool for.
   cluster = google_container_cluster.cluster.name
 
-  initial_node_count = 1
+  initial_node_count = var.node_pools_initial_node_count 
 
   # Configuration required by cluster autoscaler to adjust the size of the node pool to the current cluster usage.
   autoscaling {
     # Minimum number of nodes in the NodePool. Must be >=0 and <= max_node_count.
-    min_node_count = 4
+    min_node_count = var.node_pools_autoscaling_min_node_count 
 
     # Maximum number of nodes in the NodePool. Must be >= min_node_count.
-    max_node_count = 8 
+    max_node_count = var.node_pools_autoscaling_max_node_count 
   }
 
   # Node management configuration, wherein auto-repair and auto-upgrade is configured.
@@ -164,17 +166,17 @@ resource "google_container_node_pool" "node_pool" {
   node_config {
     # The name of a Google Compute Engine machine type. Defaults to
     # n1-standard-1.
-    machine_type = "n1-standard-1"
+    machine_type = var.node_pools_node_config_machine_type 
 
     service_account = google_service_account.default.email 
 
     # Size of the disk attached to each node, specified in GB. The smallest
     # allowed disk size is 10GB. Defaults to 100GB.
-    disk_size_gb = 100 
+    disk_size_gb = var.node_pools_node_config_disk_size_gb
 
     # Type of the disk attached to each node (e.g. 'pd-standard' or 'pd-ssd').
     # If unspecified, the default disk type is 'pd-standard'
-    disk_type = "pd-standard" 
+    disk_type = var.node_pools_node_config_disk_type
 
     # A boolean that represents whether or not the underlying node VMs are
     # preemptible. See the official documentation for more information.
