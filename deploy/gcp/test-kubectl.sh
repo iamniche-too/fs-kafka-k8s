@@ -1,4 +1,4 @@
-export GOOGLE_APPLICATION_CREDENTIALS=sturdy-shelter-259721-9cf582f8534a.json
-export KUBECONFIG=kubeconfig.yaml
+export GOOGLE_APPLICATION_CREDENTIALS=terraform-test-262517-b4ff2f611b21.json
+export KUBECONFIG=terraform-test-262517-b4ff2f611b21.yaml
 
 kubectl get namespaces 

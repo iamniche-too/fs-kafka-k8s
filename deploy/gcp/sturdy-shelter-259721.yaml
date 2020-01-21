@@ -25,10 +25,10 @@ users:
   user:
     auth-provider:
       config:
-        access-token: ya29.Ima6BxMKsZsUXoRyw4_DCcvP_0EX68c0hNg1X4Gn0w4EqTCNY2nq1skwMvkNDDgNUZKhTCmWwRcR-YHVjWXnL6tHSL7Wy-J_k0js7IyGqjqoIm7bwxX3srsZJNEfTGvCoiKd4kAbwxI
+        access-token: ya29.Ima6B6uOAUSCpwFL4ZQDVln9xIwch3Uq622KmUOX1GVEvTMuh1nzyexLnP5NwAhhvoeZKFSHfqixI4NGt5KLc-hp7I8X8-yP_8_J9mmq28LsnU-ENh16jctJ_EafZ6ediMOEnOrQOs4
         cmd-args: config config-helper --format=json
         cmd-path: /snap/google-cloud-sdk/112/bin/gcloud
-        expiry: "2020-01-21T12:22:40Z"
+        expiry: "2020-01-21T15:01:35Z"
         expiry-key: '{.credential.token_expiry}'
         token-key: '{.credential.access_token}'
       name: gcp
