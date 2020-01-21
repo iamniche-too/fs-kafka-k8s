@@ -1,5 +1,5 @@
-export GOOGLE_APPLICATION_CREDENTIALS=./deploy/gcp/sturdy-shelter-259721-9cf582f8534a.json
-export KUBECONFIG=./deploy/gcp/sturdy-shelter-259721.yaml
+export GOOGLE_APPLICATION_CREDENTIALS=./deploy/gcp/terraform-test-262517-b4ff2f611b21.json
+export KUBECONFIG=./deploy/gcp/terraform-test-262517-b4ff2f611b21.yaml
 
 kustomize build gcp |\
 kubectl apply -f - 
