@@ -1,6 +1,10 @@
 # https://www.terraform.io/docs/providers/google/r/container_cluster.html
 resource "google_container_cluster" "cluster" {
-  location = "europe-west2"
+
+  # If you specify a zone (such as us-central1-a), the cluster will be a zonal 
+  # cluster with a single cluster master. If you specify a region (such as us-west1),
+  # the cluster will be a regional cluster with multiple masters spread across zones in the region
+  location = "europe-west2-a"
 
   name = "gke-kafka-cluster" 
 
@@ -38,10 +42,10 @@ resource "google_container_cluster" "cluster" {
     # Whether network policy is enabled on the cluster. Defaults to false.
     # In GKE this also enables the ip masquerade agent
     # https://cloud.google.com/kubernetes-engine/docs/how-to/ip-masquerade-agent
-    enabled = true
+    enabled = false 
 
     # The selected network policy provider. Defaults to PROVIDER_UNSPECIFIED.
-    provider = "CALICO"
+    #provider = "CALICO"
   }
 
   master_auth {

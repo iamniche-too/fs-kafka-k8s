@@ -15,6 +15,7 @@ resource "google_compute_subnetwork" "vpc_subnetwork" {
   #name = "default-${var.gcp_cluster_region}"
   name = "kafka-cluster-vpc-subnet" 
 
+  # 2^(32-20)=1024 hosts 
   ip_cidr_range = "10.0.16.0/20" 
 
   # The network this subnet belongs to. Only networks that are in the
@@ -27,10 +28,12 @@ resource "google_compute_subnetwork" "vpc_subnetwork" {
   # ranges.
   secondary_ip_range {
     range_name    = "pods"
+    # 2^(32-24)=256 hosts
     ip_cidr_range = "10.16.0.0/12"
   }
   secondary_ip_range {
     range_name    = "services"
+    # 2^(32-24)=256 hosts
     ip_cidr_range = "10.1.0.0/20" 
   }
 
@@ -42,4 +45,42 @@ resource "google_compute_subnetwork" "vpc_subnetwork" {
   depends_on = [
     google_compute_network.vpc_network,
   ]
+}
+
+# ssh firewall rule
+resource "google_compute_firewall" "ssh" {
+  name    = "kafka-cluster-vpc-allow-ssh"
+  network = "kafka-cluster-vpc"
+
+  allow {
+    protocol = "tcp"
+    ports    = ["22"]
+  }
+
+  target_tags   = ["kafka-cluster-vpc-allow-ssh"]
+
+  # allow from anywhere
+  source_ranges = ["0.0.0.0/0"]
+}
+
+resource "google_compute_router" "router" {
+  name    = "my-router"
+  network = google_compute_network.vpc_network.name
+
+  bgp {
+    asn = 64514
+  }
+}
+
+resource "google_compute_router_nat" "nat" {
+  name                               = "my-router-nat"
+  router                             = google_compute_router.router.name
+  region                             = google_compute_router.router.region
+  nat_ip_allocate_option             = "AUTO_ONLY"
+  source_subnetwork_ip_ranges_to_nat = "ALL_SUBNETWORKS_ALL_IP_RANGES"
+
+  log_config {
+    enable = true
+    filter = "ERRORS_ONLY"
+  }
 }
