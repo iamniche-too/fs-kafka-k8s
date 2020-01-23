@@ -8,4 +8,4 @@ spec:
   selector:
     matchLabels:
       app: kafka
-  minAvailable: 3
+  minAvailable: 7 

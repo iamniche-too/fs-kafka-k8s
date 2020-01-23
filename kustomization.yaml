@@ -8,6 +8,8 @@ resources:
   - namespace/kafka-namespace.yaml
   - namespace/kafka-cluster-role.yaml
 
+  - dockerhub-secret.yaml
+
   - kafka/kafka-config.yaml
   - kafka/kafka-headless-service.yaml
   - kafka/kafka-statefulset.yaml

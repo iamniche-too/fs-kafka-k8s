@@ -8,3 +8,4 @@ resources:
 - kafka/kafka4-external-service.yaml
 patches:
 - kafka/kafka-statefulset.yaml
+- kafka/kafka-pdb.yaml

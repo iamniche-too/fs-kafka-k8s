@@ -6,6 +6,8 @@ metadata:
   namespace: kafka
   labels:
     app: kafka
+  annotations:
+    imageregistry: "https://hub.docker.com"
 spec:
   serviceName: kafka-service
   replicas: 3 
