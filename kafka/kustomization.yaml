@@ -8,6 +8,13 @@ resources:
   - kafka-headless-service.yaml
   - kafka-statefulset.yaml
   - kafka-pdb.yaml
-  - kafka0-external-service.yaml
-  - kafka1-external-service.yaml
-  - kafka2-external-service.yaml 
+
+# Internal services
+  - internal-service-0.yaml
+  - internal-service-1.yaml
+  - internal-service-2.yaml 
+
+# External services only required if exposing via ExternalIP
+#  - B-external-service-0.yaml
+#  - B-external-service-1.yaml
+#  - B-external-service-2.yaml 

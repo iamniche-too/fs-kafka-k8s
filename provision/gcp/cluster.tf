@@ -42,10 +42,10 @@ resource "google_container_cluster" "cluster" {
     # Whether network policy is enabled on the cluster. Defaults to false.
     # In GKE this also enables the ip masquerade agent
     # https://cloud.google.com/kubernetes-engine/docs/how-to/ip-masquerade-agent
-    enabled = false 
+    enabled = true 
 
     # The selected network policy provider. Defaults to PROVIDER_UNSPECIFIED.
-    #provider = "CALICO"
+    provider = "CALICO"
   }
 
   master_auth {

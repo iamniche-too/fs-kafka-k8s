@@ -28,12 +28,10 @@ resource "google_compute_subnetwork" "vpc_subnetwork" {
   # ranges.
   secondary_ip_range {
     range_name    = "pods"
-    # 2^(32-24)=256 hosts
     ip_cidr_range = "10.16.0.0/12"
   }
   secondary_ip_range {
     range_name    = "services"
-    # 2^(32-24)=256 hosts
     ip_cidr_range = "10.1.0.0/20" 
   }
 
@@ -48,20 +46,20 @@ resource "google_compute_subnetwork" "vpc_subnetwork" {
 }
 
 # ssh firewall rule
-resource "google_compute_firewall" "ssh" {
-  name    = "kafka-cluster-vpc-allow-ssh"
-  network = "kafka-cluster-vpc"
-
-  allow {
-    protocol = "tcp"
-    ports    = ["22"]
-  }
-
-  target_tags   = ["kafka-cluster-vpc-allow-ssh"]
-
-  # allow from anywhere
-  source_ranges = ["0.0.0.0/0"]
-}
+#resource "google_compute_firewall" "ssh" {
+#  name    = "kafka-cluster-vpc-allow-ssh"
+#  network = "kafka-cluster-vpc"
+#
+#  allow {
+#    protocol = "tcp"
+#    ports    = ["22"]
+#  }
+#
+#  target_tags   = ["kafka-cluster-vpc-allow-ssh"]
+#
+#  # allow from anywhere
+#  source_ranges = ["0.0.0.0/0"]
+#}
 
 resource "google_compute_router" "router" {
   name    = "my-router"

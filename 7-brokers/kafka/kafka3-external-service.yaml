@@ -4,7 +4,8 @@ metadata:
   name: external-service-3
   namespace: kafka
 spec:
-  type: NodePort
+  type: LoadBalancer
+  externalTrafficPolicy: Local
   selector:
     statefulset.kubernetes.io/pod-name: kafka-3
   ports:

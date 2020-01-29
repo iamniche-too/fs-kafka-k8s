@@ -5,18 +5,18 @@ namespace: kafka
 
 resources:
 
-  - namespace/kafka-namespace.yaml
-  - namespace/kafka-cluster-role.yaml
+  - namespace/A-kafka-namespace.yaml
+  - namespace/A-kafka-cluster-role.yaml
 
-  - dockerhub-secret.yaml
+# External services only required if exposing to ExternalIP
+#  - kafka/B-external-service-0.yaml
+#  - kafka/B-external-service-1.yaml
+#  - kafka/B-external-service-2.yaml 
 
   - kafka/kafka-config.yaml
   - kafka/kafka-headless-service.yaml
   - kafka/kafka-statefulset.yaml
   - kafka/kafka-pdb.yaml
-  - kafka/kafka0-external-service.yaml
-  - kafka/kafka1-external-service.yaml
-  - kafka/kafka2-external-service.yaml 
 
   - zookeeper/zoo0-service.yaml
   - zookeeper/zoo0-claim0-persistentvolumeclaim.yaml
