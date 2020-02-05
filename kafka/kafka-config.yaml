@@ -17,11 +17,17 @@ data:
     # Wait for the ExternalIP to be assigned in the (external) LoadBalance service
     # while [ -z "`kubectl -n kafka get service external-service-$KAFKA_BROKER_ID -o=jsonpath='{.status.loadBalancer.ingress[0].ip}'`" ]; do sleep 10; done
 
-    # Grab the ExternalIP from the external (LoadBalance) service
+    # If the consumers/producers are outside GCP, grab the ExternalIP from the external (LoadBalance) service
     # OUTSIDE_HOST=`kubectl -n kafka get service external-service-$KAFKA_BROKER_ID -o=jsonpath='{.status.loadBalancer.ingress[0].ip}'`
 
-    # If the consumers/producers are inside GCP, grab the NodeIP from the Node
-    OUTSIDE_HOST=$(kubectl get node "$NODE_NAME" -o jsonpath='{.status.addresses[?(@.type=="InternalIP")].address}')
+    # If the consumers/producers are inside GCP, and using IP addresses, grab the NodeIP from the Node
+    # OUTSIDE_HOST=$(kubectl get node "$NODE_NAME" -o jsonpath='{.status.addresses[?(@.type=="InternalIP")].address}')
+
+    # If the consumers/producers are inside GCP, and using DNS, use the hostname and well-known cluster suffix (TODO - better to query for this using hostname -f)
+    #OUTSIDE_HOST=${HOSTNAME}.kafka-service.kafka.svc.cluster.local
+    #OUTSIDE_HOST=`hostname -f`
+
+    OUTSIDE_HOST=internal-service-${HOSTNAME##*-}.kafka.svc.cluster.local
 
     OUTSIDE_PORT=$((32400 + ${KAFKA_BROKER_ID}))
 
