@@ -18,6 +18,9 @@ spec:
     metadata:
       labels:
         app: kafka
+      annotations:
+        prometheus.io/scrape: 'true'
+        prometheus.io/port: '19000'
     spec:
       initContainers:
         - name: init-config
@@ -33,6 +36,14 @@ spec:
             mountPath: /etc/kafka-config-ro
           - name: kafka-config-volume-rw
             mountPath: /etc/kafka-config-rw
+        - name: prometheus-jmx-exporter
+          image: spdigital/prometheus-jmx-exporter-kubernetes:0.3.1
+          env:
+          - name: SHARED_VOLUME_PATH
+            value: /prometheus-shared-volume
+          volumeMounts:
+            - name: prometheus-shared-volume
+              mountPath: /prometheus-shared-volume
       containers:
         - name: kafka
           image: wurstmeister/kafka
@@ -41,6 +52,9 @@ spec:
           command:
             - /opt/kafka/bin/kafka-server-start.sh
             - /etc/kafka-config-rw/server.properties
+          env:
+            - name: KAFKA_OPTS
+              value: -javaagent:/prometheus-shared-volume/jmx_prometheus_javaagent.jar=19000:/prometheus-shared-volume/configs/kafka-config.yaml
           volumeMounts:
             - name: kafka-config-volume-ro
               mountPath: /etc/kafka-config-ro
@@ -48,6 +62,8 @@ spec:
               mountPath: /etc/kafka-config-rw
             - name: data
               mountPath: /var/lib/kafka
+            - name: prometheus-shared-volume
+              mountPath: /prometheus-shared-volume
           resources:
             requests:
               memory: "1Gi"
@@ -56,6 +72,8 @@ spec:
           configMap:
             name: kafka-config
         - name: kafka-config-volume-rw
+          emptyDir: {}
+        - name: prometheus-shared-volume
           emptyDir: {}
   volumeClaimTemplates:
     - metadata:

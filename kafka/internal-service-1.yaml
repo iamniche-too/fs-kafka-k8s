@@ -3,6 +3,9 @@ kind: Service
 metadata:
   name: internal-service-1
   namespace: kafka
+  annotations:
+      prometheus.io/scrape: 'true'
+      prometheus.io/port:   '32401'
 spec:
   type: NodePort 
   selector:
