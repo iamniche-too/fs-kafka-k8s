@@ -1,5 +1,10 @@
 # fs-kafka-k8s
 
+Getting started with Kafka on GCP K8S
+
+source ./deploy/gcp/export-google-credentials.sh
+./deploy/gcp/deploy.sh
+
 Getting started with Kafka on local K8S (i.e. minikube).
 
 ## QuickStart
