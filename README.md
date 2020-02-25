@@ -5,8 +5,16 @@ Getting started with Kafka on GCP K8S
 In project root folder:
 
 ```
-source ./export-google-credentials.sh
+source ./export-gcp-credentials.sh
 ./deploy/gcp/deploy.sh
+```
+
+Deploying prometheus sidecar
+
+Ensure prometheus is running, then:
+
+```
+./patch-kafka-prometheus.sh
 ```
 
 Getting started with Kafka on local K8S (i.e. minikube).
