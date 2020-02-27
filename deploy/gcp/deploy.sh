@@ -1,3 +1,4 @@
+#!/bin/bash
 source ./export-gcp-credentials.sh
 ./deploy/gcp/generate-cluster-connection-yaml.sh
 
