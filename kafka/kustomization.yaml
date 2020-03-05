@@ -13,6 +13,10 @@ resources:
   - internal-service-0.yaml
   - internal-service-1.yaml
   - internal-service-2.yaml 
+  - internal-service-3.yaml 
+  - internal-service-4.yaml 
+  - internal-service-5.yaml 
+  - internal-service-6.yaml 
 
 # External services only required if exposing via ExternalIP
 #  - B-external-service-0.yaml

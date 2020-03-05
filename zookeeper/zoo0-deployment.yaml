@@ -40,4 +40,8 @@ spec:
         - name: zoo0-claim1
           persistentVolumeClaim:
             claimName: zoo0-claim1
+      tolerations:
+        - key: "is-kafka-broker-node"
+          operator: "Exists"
+          effect: "NoSchedule"
 status: {}
