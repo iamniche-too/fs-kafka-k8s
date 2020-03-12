@@ -6,7 +6,7 @@ namespace: kafka
 resources:
   - kafka-config.yaml
   - kafka-headless-service.yaml
-  - kafka-statefulset.yaml
+  - kafka-statefulset-generated.yaml
   - kafka-pdb.yaml
 
 # Internal services
