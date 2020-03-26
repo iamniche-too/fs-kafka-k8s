@@ -17,7 +17,7 @@ spec:
       hostname: zoo1
       containers:
         - name: zookeeper
-          image: zookeeper:3.4.14
+          image: zookeeper:3.6.0
           ports:
             - containerPort: 2181
           env:

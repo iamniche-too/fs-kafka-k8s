@@ -34,7 +34,7 @@ data:
     KAFKA_ADVERTISED_LISTENERS=OUTSIDE://${OUTSIDE_HOST}:${OUTSIDE_PORT}
 
     SEDS=("s|@ADVERTISED_LISTENERS@|advertised.listeners=PLAINTEXT://:9092,${KAFKA_ADVERTISED_LISTENERS}|")
-    #SEDS+=("s|@NUM_PARTITIONS@|num.partitions=${NUM_PARTITIONS}|")
+    SEDS+=("s|@NUM_PARTITIONS@|num.partitions=${NUM_PARTITIONS}|")
 
     printf '\n%s\n' "${SEDS[@]}" | sed -f - /etc/kafka-config-ro/server.properties > /etc/kafka-config-rw/server.properties
 
@@ -106,7 +106,7 @@ data:
     # The default number of log partitions per topic. More partitions allow greater
     # parallelism for consumption, but this will also result in more files across
     # the brokers.
-    num.partitions=10
+    #num.partitions=1
     #@NUM_PARTITIONS@
     
     # The number of threads per data directory to be used for log recovery at startup and flushing at shutdown.
@@ -165,7 +165,7 @@ data:
     # server. e.g. "127.0.0.1:3000,127.0.0.1:3001,127.0.0.1:3002".
     # You can also append an optional chroot string to the urls to specify the
     # root directory for all kafka znodes.
-    zookeeper.connect=zoo0:2181
+    zookeeper.connect=zookeeper-0.zookeeper-service.kafka.svc.cluster.local:2181,zookeeper-1.zookeeper-service.kafka.svc.cluster.local:2181,zookeeper-2.zookeeper-service.kafka.svc.cluster.local:2181
     
     # Timeout in ms for connecting to zookeeper
     zookeeper.connection.timeout.ms=6000

@@ -3,6 +3,6 @@ kind: Kustomization
 resources:
 - ../namespace
 - ../kafka
-- ../zookeeper
+- ../zookeeper-3.4.14
 patches:
 - kafka/kafka-statefulset.yaml

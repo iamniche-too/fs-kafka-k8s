@@ -4,6 +4,7 @@ kind: Kustomization
 namespace: kafka
 
 resources:
+  - ../namespace/
   - zoo0-service.yaml
   - zoo0-claim0-persistentvolumeclaim.yaml
   - zoo0-claim1-persistentvolumeclaim.yaml

@@ -1,0 +1,56 @@
+kind: ConfigMap
+metadata:
+  name: zookeeper-config
+  namespace: kafka
+apiVersion: v1
+data:
+  generate-config.sh: |-
+    #!/bin/bash
+    set -e
+    set -x
+
+    if [ -d /data ]; then
+      echo "OK - Directory /data exists."
+    fi
+
+    # extract id from hostname
+    export ZOOKEEPER_SERVER_ID="${HOSTNAME##*-}"
+
+    [ -z "$ZOOKEEPER_SERVER_ID" ] || echo "OK - ZOOKEEPER_SERVER_ID=$ZOOKEEPER_SERVER_ID"
+
+    # write the zookeeper id to disk
+    echo $ZOOKEEPER_SERVER_ID > /data/myid
+
+    if [ -f /data/myid ]; then
+      echo "OK - File /data/myid exists."
+    fi
+
+    # copy properties file
+    cp /etc/zookeeper-config-ro/zookeeper.properties /etc/zookeeper-config-rw/zookeeper.properties
+
+    # change the file permissions
+    chmod a+rwx /etc/zookeeper-config-rw/zookeeper.properties
+
+    if [ -f /etc/zookeeper-config-rw/zookeeper.properties ]; then
+      echo "OK - File /etc/zookeeper-config-rw/zookeeper.properties exists."
+    fi
+
+
+  # https://zookeeper.apache.org/doc/r3.6.0/zookeeperStarted.html
+  zookeeper.properties: |-
+    tickTime=2000
+    dataDir=/data
+
+    # separate directory for transaction logs
+    dataLogDir=/datalog
+
+    clientPort=2181
+    maxClientCnxns=2
+    initLimit=5
+    syncLimit=2
+
+    # assumes three ZKs
+    server.0=zookeeper-0.zookeeper-service.kafka.svc.cluster.local:2888:3888:participant
+    server.1=zookeeper-1.zookeeper-service.kafka.svc.cluster.local:2888:3888:participant
+    server.2=zookeeper-2.zookeeper-service.kafka.svc.cluster.local:2888:3888:participant
+

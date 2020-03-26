@@ -25,8 +25,8 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: spec.nodeName
-            #- name: NUM_PARTITIONS
-            #  value: 1 
+            - name: NUM_PARTITIONS
+              value: 1 
           command: ['/bin/bash', '/etc/kafka-config-ro/generate-config.sh']
           volumeMounts:
           - name: kafka-config-volume-ro
@@ -53,7 +53,7 @@ spec:
               mountPath: /var/lib/kafka
           resources:
             requests:
-              memory: "1Gi"
+              memory: "8Gi"
       volumes:
         - name: kafka-config-volume-ro
           configMap:
