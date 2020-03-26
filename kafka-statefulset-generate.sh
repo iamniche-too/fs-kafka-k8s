@@ -21,6 +21,22 @@ spec:
       labels:
         app: kafka
     spec:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: kafka-broker-node 
+              operator: In
+              values:
+              - true 
+      podAntiAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+                - key: app
+                  operator: In
+                  values: ["zookeeper"]
+            topologyKey: "kubernetes.io/hostname"
       initContainers:
         - name: init-config
           image: nichemley/fs-kafka-config-image 
