@@ -30,7 +30,7 @@ spec:
                 fieldRef:
                   fieldPath: spec.nodeName
             - name: NUM_PARTITIONS
-              value: $NUM_PARTITIONS 
+              value: "$NUM_PARTITIONS"
           command: ['/bin/bash', '/etc/kafka-config-ro/generate-config.sh']
           volumeMounts:
           - name: kafka-config-volume-ro
