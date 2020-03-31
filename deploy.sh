@@ -12,8 +12,12 @@ kubectl apply -f ./zookeeper-3.4.14/zookeeper-config.yaml --kubeconfig ./kubecon
 kubectl apply -f ./zookeeper-3.4.14/zookeeper-statefulset.yaml --kubeconfig ./kubeconfig.yaml
 kubectl apply -f ./zookeeper-3.4.14/zookeeper-service.yaml --kubeconfig ./kubeconfig.yaml
 
+echo "Waiting 40s for ZK to start..."
+
+sleep 40 
+
 # generate the stateful set with the specified number of partitions
-./kafka-statefulset-generate.sh $1 
+./kafka/kafka-statefulset-generate.sh $1 
 
 # apply kafka
 kubectl apply -f ./kafka/kafka-config.yaml --kubeconfig ./kubeconfig.yaml

@@ -4,5 +4,3 @@ resources:
 - ../namespace
 - ../kafka
 - ../zookeeper-3.4.14
-patches:
-- kafka/kafka-statefulset.yaml

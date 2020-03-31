@@ -2,7 +2,10 @@
 
 NUM_PARTITIONS=$1
 
+echo "Generating ./kafka/kafka-statefulset-generated.yaml with NUM_PARTITIONS $NUM_PARTITIONS."
+
 cat <<EOF > ./kafka/kafka-statefulset-generated.yaml
+---
 kind: StatefulSet
 apiVersion: apps/v1
 metadata:
@@ -12,7 +15,7 @@ metadata:
     app: kafka
 spec:
   serviceName: kafka-service
-  replicas: 0 
+  replicas: 0
   selector:
     matchLabels:
       app: kafka
@@ -21,25 +24,25 @@ spec:
       labels:
         app: kafka
     spec:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-          - matchExpressions:
-            - key: kafka-broker-node 
-              operator: In
-              values:
-              - true 
-      podAntiAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          - labelSelector:
-              matchExpressions:
-                - key: app
-                  operator: In
-                  values: ["zookeeper"]
-            topologyKey: "kubernetes.io/hostname"
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kafka-broker-node
+                    operator: In
+                    values: ["true"]
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values: ["zookeeper"]
+              topologyKey: "kubernetes.io/hostname"
       initContainers:
         - name: init-config
-          image: nichemley/fs-kafka-config-image 
+          image: nichemley/fs-kafka-config-image
           env:
             - name: NODE_NAME
               valueFrom:
@@ -49,10 +52,10 @@ spec:
               value: "$NUM_PARTITIONS"
           command: ['/bin/bash', '/etc/kafka-config-ro/generate-config.sh']
           volumeMounts:
-          - name: kafka-config-volume-ro
-            mountPath: /etc/kafka-config-ro
-          - name: kafka-config-volume-rw
-            mountPath: /etc/kafka-config-rw
+            - name: kafka-config-volume-ro
+              mountPath: /etc/kafka-config-ro
+            - name: kafka-config-volume-rw
+              mountPath: /etc/kafka-config-rw
       containers:
         - name: kafka
           image: wurstmeister/kafka
@@ -73,17 +76,17 @@ spec:
               mountPath: /var/lib/kafka
           resources:
             requests:
-              memory: "8Gi"
+              memory: "1Gi"
       volumes:
         - name: kafka-config-volume-ro
           configMap:
             name: kafka-config
         - name: kafka-config-volume-rw
           emptyDir: {}
-      tolerations:
-      - key: "is-kafka-broker-node"
-        operator: "Exists"
-        effect: "NoSchedule"
+  # tolerations:
+  #  - key: "is-kafka-broker-node"
+  #    operator: "Exists"
+  #    effect: "NoSchedule"
   volumeClaimTemplates:
     - metadata:
         name: data
