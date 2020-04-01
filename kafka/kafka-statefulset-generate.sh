@@ -38,7 +38,7 @@ spec:
                 matchExpressions:
                   - key: app
                     operator: In
-                    values: ["zookeeper"]
+                    values: ["kafka", "zookeeper"]
               topologyKey: "kubernetes.io/hostname"
       initContainers:
         - name: init-config
