@@ -76,7 +76,7 @@ spec:
               mountPath: /var/lib/kafka
           resources:
             requests:
-              memory: "1Gi"
+              memory: "8Gi"
       volumes:
         - name: kafka-config-volume-ro
           configMap:
@@ -95,5 +95,5 @@ spec:
           - ReadWriteOnce
         resources:
           requests:
-            storage: 10Gi
+            storage: 100Gi
 EOF
