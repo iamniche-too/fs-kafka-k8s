@@ -20,7 +20,7 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: kafka-broker-node 
+              - key: zk-node 
                 operator: In
                 values: ["true"]
         podAntiAffinity:
