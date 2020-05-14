@@ -1,6 +1,7 @@
 #!/bin/bash
 
 NUM_PARTITIONS=$1
+NUM_BROKERS=$2
 
 echo "Generating ./kafka/kafka-statefulset-generated.yaml with NUM_PARTITIONS $NUM_PARTITIONS, NUM_BROKERS $NUM_BROKERS."
 
