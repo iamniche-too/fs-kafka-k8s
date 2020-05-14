@@ -2,7 +2,7 @@
 
 NUM_PARTITIONS=$1
 
-echo "Generating ./kafka/kafka-statefulset-generated.yaml with NUM_PARTITIONS $NUM_PARTITIONS."
+echo "Generating ./kafka/kafka-statefulset-generated.yaml with NUM_PARTITIONS $NUM_PARTITIONS, NUM_BROKERS $NUM_BROKERS."
 
 cat <<EOF > ./kafka/kafka-statefulset-generated.yaml
 ---
@@ -50,6 +50,8 @@ spec:
                   fieldPath: spec.nodeName
             - name: NUM_PARTITIONS
               value: "$NUM_PARTITIONS"
+            - name: NUM_BROKERS
+              value: "$NUM_BROKERS" 
           command: ['/bin/bash', '/etc/kafka-config-ro/generate-config.sh']
           volumeMounts:
             - name: kafka-config-volume-ro

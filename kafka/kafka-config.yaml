@@ -35,6 +35,7 @@ data:
 
     SEDS=("s|@ADVERTISED_LISTENERS@|advertised.listeners=PLAINTEXT://:9092,${KAFKA_ADVERTISED_LISTENERS}|")
     SEDS+=("s|@NUM_PARTITIONS@|num.partitions=${NUM_PARTITIONS}|")
+    SEDS+=("s|@DEFAULT_REPLICATION_FACTOR@|default.replication.factor=${NUM_BROKERS}|")
 
     printf '\n%s\n' "${SEDS[@]}" | sed -f - /etc/kafka-config-ro/server.properties > /etc/kafka-config-rw/server.properties
 
@@ -108,9 +109,13 @@ data:
     # The default number of log partitions per topic. More partitions allow greater
     # parallelism for consumption, but this will also result in more files across
     # the brokers.
-    #num.partitions=1
-    #@NUM_PARTITIONS@
-    
+    @NUM_PARTITIONS@
+
+    # default replication factor
+    # see http://kafka.apache.org/documentation/#brokerconfigs
+    # defaults to 1   
+    @DEFAULT_REPLICATION_FACTOR@
+ 
     # The number of threads per data directory to be used for log recovery at startup and flushing at shutdown.
     # This value is recommended to be increased for installations with data dirs located in RAID array.
     num.recovery.threads.per.data.dir=1
