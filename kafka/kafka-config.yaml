@@ -113,8 +113,9 @@ data:
 
     # default replication factor
     # see http://kafka.apache.org/documentation/#brokerconfigs
-    # defaults to 1   
-    @DEFAULT_REPLICATION_FACTOR@
+    # defaults to 1 i.e. no replication across brokers
+    default.replication.factor=1
+    #@DEFAULT_REPLICATION_FACTOR@
  
     # The number of threads per data directory to be used for log recovery at startup and flushing at shutdown.
     # This value is recommended to be increased for installations with data dirs located in RAID array.
