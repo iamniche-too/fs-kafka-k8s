@@ -16,8 +16,8 @@ echo "Waiting 138s for ZKs to start..."
 
 sleep 138 
 
-# generate the stateful set with the specified number of partitions
-./kafka/kafka-statefulset-generate.sh $1 
+# generate the stateful set with the specified number of partitions and number of brokers
+./kafka/kafka-statefulset-generate.sh $1 $2
 
 # apply kafka
 kubectl apply -f ./kafka/kafka-config.yaml --kubeconfig ./kubeconfig.yaml
