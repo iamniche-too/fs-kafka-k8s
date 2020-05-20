@@ -1,9 +1,8 @@
 #!/bin/bash
 
-NUM_PARTITIONS=$1
-NUM_BROKERS=$2
+NUM_BROKERS=$1
 
-echo "Generating ./kafka/kafka-statefulset-generated.yaml with NUM_PARTITIONS $NUM_PARTITIONS, NUM_BROKERS $NUM_BROKERS."
+echo "Generating ./kafka/kafka-statefulset-generated.yaml with NUM_BROKERS $NUM_BROKERS."
 
 cat <<EOF > ./kafka/kafka-statefulset-generated.yaml
 ---
@@ -49,8 +48,6 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: spec.nodeName
-            - name: NUM_PARTITIONS
-              value: "$NUM_PARTITIONS"
             - name: NUM_BROKERS
               value: "$NUM_BROKERS" 
           command: ['/bin/bash', '/etc/kafka-config-ro/generate-config.sh']
