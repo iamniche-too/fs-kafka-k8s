@@ -53,6 +53,8 @@ spec:
               value: "$NUM_PARTITIONS"
             - name: NUM_BROKERS
               value: "$NUM_BROKERS" 
+            - name: KAFKA_HEAP_OPTS
+            - value: "-Xmx8g -Xms8g"
           command: ['/bin/bash', '/etc/kafka-config-ro/generate-config.sh']
           volumeMounts:
             - name: kafka-config-volume-ro
