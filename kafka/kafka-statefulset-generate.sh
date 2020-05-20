@@ -71,7 +71,10 @@ spec:
             - name: JMX_PORT
               value: "5555"
             - name: KAFKA_HEAP_OPTS
-            - value: "-Xmx8g -Xms8g"
+              value: "-Xmx8g -Xms8g"
+            - name: JAVA_OPTS 
+              value: "-XX:+UseG1GC -XX:MaxGCPauseMillis=20"
+            # value: "-XX:MetaspaceSize=96m -XX:+UseG1GC -XX:MaxGCPauseMillis=20 -XX:InitiatingHeapOccupancyPercent=35 -XX:G1HeapRegionSize=16M -XX:MinMetaspaceFreeRatio=50 -XX:MaxMetaspaceFreeRatio=80"
           volumeMounts:
             - name: kafka-config-volume-ro
               mountPath: /etc/kafka-config-ro
