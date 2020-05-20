@@ -53,8 +53,6 @@ spec:
               value: "$NUM_PARTITIONS"
             - name: NUM_BROKERS
               value: "$NUM_BROKERS" 
-            - name: KAFKA_HEAP_OPTS
-            - value: "-Xmx8g -Xms8g"
           command: ['/bin/bash', '/etc/kafka-config-ro/generate-config.sh']
           volumeMounts:
             - name: kafka-config-volume-ro
@@ -72,6 +70,8 @@ spec:
           env:
             - name: JMX_PORT
               value: "5555"
+            - name: KAFKA_HEAP_OPTS
+            - value: "-Xmx8g -Xms8g"
           volumeMounts:
             - name: kafka-config-volume-ro
               mountPath: /etc/kafka-config-ro
