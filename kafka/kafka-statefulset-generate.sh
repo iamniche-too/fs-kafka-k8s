@@ -70,7 +70,7 @@ spec:
             - name: KAFKA_HEAP_OPTS
               value: "-Xmx8g -Xms8g"
             - name: JAVA_OPTS 
-              value: "-XX:+UseG1GC -XX:MaxGCPauseMillis=20"
+              value: "-XX:+UseG1GC -XX:MaxGCPauseMillis=20 -XX:ParallelGCThreads=20 -XX:ConcGCThreads=5 -XX:InitiatingHeapOccupancyPercent=70 -XX:MetaspaceSize=96m"
               # value: "-XX:+UseG1GC -XX:MaxGCPauseMillis=20 -XX:MetaspaceSize=96m -XX:InitiatingHeapOccupancyPercent=35 -XX:G1HeapRegionSize=16M -XX:MinMetaspaceFreeRatio=50 -XX:MaxMetaspaceFreeRatio=80"
           volumeMounts:
             - name: kafka-config-volume-ro
