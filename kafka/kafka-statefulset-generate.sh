@@ -69,9 +69,15 @@ spec:
               value: "5555"
             - name: KAFKA_HEAP_OPTS
               value: "-Xmx8g -Xms8g"
-            - name: JAVA_OPTS 
-              value: "-XX:+UseG1GC -XX:MaxGCPauseMillis=20 -XX:ParallelGCThreads=20 -XX:ConcGCThreads=5 -XX:InitiatingHeapOccupancyPercent=70 -XX:MetaspaceSize=96m"
-              # value: "-XX:+UseG1GC -XX:MaxGCPauseMillis=20 -XX:MetaspaceSize=96m -XX:InitiatingHeapOccupancyPercent=35 -XX:G1HeapRegionSize=16M -XX:MinMetaspaceFreeRatio=50 -XX:MaxMetaspaceFreeRatio=80"
+            - name: KAFKA_JVM_PERFORMANCE_OPTS
+
+              # these are the defaults in kafka-run-class.sh
+              # value: "-server -XX:+UseG1GC -XX:MaxGCPauseMillis=20 -XX:InitiatingHeapOccupancyPercent=35 -XX:+ExplicitGCInvokesConcurrent -XX:MaxInlineLevel=15 -Djava.awt.headless=true"
+
+              value: "-server -XX:+UseG1GC -XX:MaxGCPauseMillis=20 -XX:InitiatingHeapOccupancyPercent=70 -XX:+ExplicitGCInvokesConcurrent -XX:MaxInlineLevel=15 -XX:MetaspaceSize=100M -Djava.awt.headless=true"
+
+              # other values of interest
+              # value: "-XX:ParallelGCThreads=20 -XX:ConcGCThreads=5 -XX:MetaspaceSize=100m -XX:G1HeapRegionSize=16M -XX:MinMetaspaceFreeRatio=50 -XX:MaxMetaspaceFreeRatio=80"
           volumeMounts:
             - name: kafka-config-volume-ro
               mountPath: /etc/kafka-config-ro
