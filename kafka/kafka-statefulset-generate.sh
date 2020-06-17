@@ -88,7 +88,7 @@ spec:
           resources:
             requests:
               memory: "8Gi"
-            limit:
+            limits:
               memory: "8Gi"
       volumes:
         - name: kafka-config-volume-ro
