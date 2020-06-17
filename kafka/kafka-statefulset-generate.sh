@@ -74,10 +74,10 @@ spec:
               # these are the defaults in kafka-run-class.sh
               # value: "-server -XX:+UseG1GC -XX:MaxGCPauseMillis=20 -XX:InitiatingHeapOccupancyPercent=35 -XX:+ExplicitGCInvokesConcurrent -XX:MaxInlineLevel=15 -Djava.awt.headless=true"
 
-              value: "-server -XX:+UseG1GC -XX:MaxGCPauseMillis=20 -XX:InitiatingHeapOccupancyPercent=70 -XX:+ExplicitGCInvokesConcurrent -XX:MaxInlineLevel=15 -XX:MetaspaceSize=100M -Djava.awt.headless=true"
+              value: "-server -XX:+UseG1GC -XX:MaxGCPauseMillis=20 -XX:InitiatingHeapOccupancyPercent=35 -XX:+ExplicitGCInvokesConcurrent -XX:MaxInlineLevel=15 -XX:MetaspaceSize=96M -XX:G1HeapRegionSize=16M -XX:MinMetaspaceFreeRatio=50 -XX:MaxMetaspaceFreeRatio=80 -Djava.awt.headless=true"
 
               # other values of interest
-              # value: "-XX:ParallelGCThreads=20 -XX:ConcGCThreads=5 -XX:MetaspaceSize=100m -XX:G1HeapRegionSize=16M -XX:MinMetaspaceFreeRatio=50 -XX:MaxMetaspaceFreeRatio=80"
+              # value: "-XX:ParallelGCThreads=20 -XX:ConcGCThreads=5"
           volumeMounts:
             - name: kafka-config-volume-ro
               mountPath: /etc/kafka-config-ro
@@ -87,6 +87,8 @@ spec:
               mountPath: /var/lib/kafka
           resources:
             requests:
+              memory: "8Gi"
+            limit:
               memory: "8Gi"
       volumes:
         - name: kafka-config-volume-ro
