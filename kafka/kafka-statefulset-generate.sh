@@ -96,9 +96,9 @@ spec:
               mountPath: /var/lib/kafka
           resources:
             requests:
-              memory: "8Gi"
+              memory: "24Gi"
             limits:
-              memory: "8Gi"
+              memory: "24Gi"
       volumes:
         - name: kafka-config-volume-ro
           configMap:
