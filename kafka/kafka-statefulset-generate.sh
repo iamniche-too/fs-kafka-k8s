@@ -56,6 +56,30 @@ spec:
               mountPath: /etc/kafka-config-ro
             - name: kafka-config-volume-rw
               mountPath: /etc/kafka-config-rw
+        - name: init-sysctl-1
+          image: busybox
+          command:
+            - sysctl
+            - -w
+            - vm.swappiness=1
+          securityContext:
+            privileged: true
+        - name: init-sysctl-2
+          image: busybox
+          command:
+            - sysctl
+            - -w
+            - vm.dirty_ratio=5
+          securityContext:
+            privileged: true
+        - name: init-sysctl-3
+          image: busybox
+          command:
+            - sysctl
+            - -w
+            - vm.dirty_background_ratio=5
+          securityContext:
+            privileged: true
       containers:
         - name: kafka
           image: wurstmeister/kafka
