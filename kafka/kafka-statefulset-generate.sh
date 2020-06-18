@@ -76,8 +76,9 @@ spec:
           env:
             - name: JMX_PORT
               value: "5555"
+            # Keep heap size small, save rest for page cache - https://www.slideshare.net/ToddPalino/kafka-at-peak-performance
             - name: KAFKA_HEAP_OPTS
-              value: "-Xmx22g -Xms22g"
+              value: "-Xmx6g -Xms6g"
             - name: KAFKA_JVM_PERFORMANCE_OPTS
 
               # these are the defaults in kafka-run-class.sh
