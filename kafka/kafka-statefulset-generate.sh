@@ -77,7 +77,7 @@ spec:
             - name: JMX_PORT
               value: "5555"
             - name: KAFKA_HEAP_OPTS
-              value: "-Xmx11g -Xms11g"
+              value: "-Xmx24g -Xms24g"
             - name: KAFKA_JVM_PERFORMANCE_OPTS
 
               # these are the defaults in kafka-run-class.sh
