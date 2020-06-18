@@ -77,7 +77,7 @@ spec:
             - name: JMX_PORT
               value: "5555"
             - name: KAFKA_HEAP_OPTS
-              value: "-Xmx23g -Xms23g"
+              value: "-Xmx22g -Xms22g"
             - name: KAFKA_JVM_PERFORMANCE_OPTS
 
               # these are the defaults in kafka-run-class.sh
@@ -96,9 +96,9 @@ spec:
               mountPath: /var/lib/kafka
           resources:
             requests:
-              memory: "23Gi"
+              memory: "22Gi"
             limits:
-              memory: "23Gi"
+              memory: "22Gi"
       volumes:
         - name: kafka-config-volume-ro
           configMap:
