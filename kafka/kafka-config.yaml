@@ -161,7 +161,8 @@ data:
     
     # A size-based retention policy for logs. Segments are pruned from the log unless the remaining
     # segments drop below log.retention.bytes. Functions independently of log.retention.hours.
-    #log.retention.bytes=1073741824
+    # Set to 5Gb (per partition)
+    log.retention.bytes=5368706371
     
     # The maximum size of a log segment file. When this size is reached a new log segment will be created.
     log.segment.bytes=1073741824
