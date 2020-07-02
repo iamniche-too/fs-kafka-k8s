@@ -62,7 +62,7 @@ spec:
           command:
             - sh 
             - -c
-            - sysctl -w vm.swappiness=1; sysctl -w vm.dirty_ratio=60; sysctl -w vm.dirty_background_ratio=5
+            - sysctl -w vm.swappiness=1; sysctl -w vm.dirty_ratio=60; sysctl -w vm.dirty_background_ratio=5; sysctl -w net.ipv4.tcp_max_syn_backlog=1024; system -w net.ipv4.tcp_max_tw_buckets=262144
           securityContext:
             privileged: true
       containers:
