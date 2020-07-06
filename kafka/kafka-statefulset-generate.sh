@@ -62,7 +62,8 @@ spec:
           command:
             - sh 
             - -c
-            - sysctl -w vm.swappiness=1; sysctl -w vm.dirty_ratio=60; sysctl -w vm.dirty_background_ratio=5; sysctl -w net.ipv4.tcp_max_syn_backlog=1024; sysctl -w net.ipv4.tcp_max_tw_buckets=262144; sysctl -w net.ipv4.tcp_rmem='4096 87380 33554432'; sysctl -w net.ipv4.tcp_wmem='4096 65536 33554432'
+            - sysctl -w vm.swappiness=1; sysctl -w vm.dirty_ratio=60; sysctl -w vm.dirty_background_ratio=5; sysctl -w net.ipv4.tcp_max_syn_backlog=1024; sysctl -w net.ipv4.tcp_max_tw_buckets=262144
+            # sysctl -w net.ipv4.tcp_rmem='4096 87380 33554432'; sysctl -w net.ipv4.tcp_wmem='4096 65536 33554432'
           securityContext:
             privileged: true
       containers:
