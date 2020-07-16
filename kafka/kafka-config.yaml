@@ -39,9 +39,6 @@ data:
     SEDS+=("s|@NUM_PARTITIONS@|num.partitions=${NUM_PARTITIONS}|")
     SEDS+=("s|@REPLICATION_FACTOR@|default.replication.factor=${REPLICATION_FACTOR}|")
 
-    # default replication factor is 1
-    SEDS+=("s|@DEFAULT_REPLICATION_FACTOR@|default.replication.factor=1|")
-
     printf '\n%s\n' "${SEDS[@]}" | sed -f - /etc/kafka-config-ro/server.properties > /etc/kafka-config-rw/server.properties
 
   server.properties: |-
