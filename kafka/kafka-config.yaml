@@ -36,7 +36,7 @@ data:
     SEDS=("s|@ADVERTISED_LISTENERS@|advertised.listeners=PLAINTEXT://:9092,${KAFKA_ADVERTISED_LISTENERS}|")
 
     # set the number of partitions to be a multiple (here, a multiple of 1) of the number of brokers
-    SEDS+=("s|@NUM_PARTITIONS@|num.partitions=${NUM_BROKERS}|")
+    SEDS+=("s|@NUM_PARTITIONS@|num.partitions=${NUM_PARTITIONS}|")
 
     # default replication factor is 1
     SEDS+=("s|@DEFAULT_REPLICATION_FACTOR@|default.replication.factor=1|")
