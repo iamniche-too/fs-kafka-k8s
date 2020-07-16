@@ -38,7 +38,6 @@ data:
     # set the number of partitions to be a multiple (here, a multiple of 1) of the number of brokers
     SEDS+=("s|@NUM_PARTITIONS@|num.partitions=${NUM_PARTITIONS}|")
     SEDS+=("s|@REPLICATION_FACTOR@|default.replication.factor=${REPLICATION_FACTOR}|")
->>>>>>> c40b5bc71a951cb76a25af9865cf67c913da68ac
 
     # default replication factor is 1
     SEDS+=("s|@DEFAULT_REPLICATION_FACTOR@|default.replication.factor=1|")
