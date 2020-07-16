@@ -1,6 +1,7 @@
 #!/bin/bash
 
 NUM_PARTITIONS=$1
+REPLICATION_FACTOR=$2
 
 echo "Generating ./kafka/kafka-statefulset-generated.yaml with NUM_PARTITIONS $NUM_PARTITIONS REPLICATION_FACTOR $REPLICATION_FACTOR."
 
