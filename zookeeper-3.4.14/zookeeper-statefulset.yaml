@@ -8,6 +8,7 @@ spec:
     matchLabels:
       app: zookeeper
   serviceName: zookeeper-service
+  # Hard-coded to 3 ZK
   replicas: 3 
   template:
     metadata:
