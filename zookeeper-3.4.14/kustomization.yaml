@@ -6,4 +6,4 @@ namespace: kafka
 resources:
   - zookeeper-service.yaml
   - zookeeper-config.yaml
-  - zookeeper-statefulset.yaml
+  - zookeeper-statefulset-generated.yaml
