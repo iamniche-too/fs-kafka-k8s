@@ -97,7 +97,7 @@ spec:
             # JMX Exporter Java agent
             # Note - exposes /metrics on port 7071
             - name: KAFKA_OPTS
-              value: -javaagent:/usr/app/jmx_prometheus_javaagent.jar=7071:/usr/app/prom-jmx-agent-config.yml
+              value: -javaagent:/usr/app/jmx_prometheus_javaagent-0.13.0.jar=7071:/usr/app/prom-jmx-agent-config.yml
           volumeMounts:
             - name: kafka-config-volume-ro
               mountPath: /etc/kafka-config-ro
