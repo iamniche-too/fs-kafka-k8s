@@ -76,9 +76,9 @@ spec:
           image: nichemley/fs-kafka-image
           ports:
             - containerPort: 9092
-            # JMX exporter java agent port
+              name: default
             - containerPort: 7071
-              name: jmx-exporter-javaagent
+              name: jmx
           command:
             - /opt/kafka/bin/kafka-server-start.sh
             - /etc/kafka-config-rw/server.properties

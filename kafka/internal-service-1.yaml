@@ -15,3 +15,10 @@ spec:
     port: 32401
     nodePort: 32401
     targetPort: 9094
+    name: default
+  - port: 32501
+    nodePort: 32501
+    protocol: TCP
+    targetPort: 7071
+    name: jmx
+

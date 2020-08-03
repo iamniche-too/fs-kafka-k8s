@@ -11,6 +11,9 @@ spec:
   - port: 9092
     name: kafka-port
     protocol: TCP
+  - port: 7071
+    name: jmx
+    protocol: TCP
   clusterIP: None
   selector:
     app: kafka
