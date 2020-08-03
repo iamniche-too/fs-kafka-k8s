@@ -92,6 +92,10 @@ spec:
 
               # other values of interest
               # value: "-XX:ParallelGCThreads=20 -XX:ConcGCThreads=5"
+            # JMX Exporter Java agent
+            # Note - exposes /metrics on port 7071
+            - name: KAFKA_OPTS
+              value: -javaagent:/usr/app/jmx_prometheus_javaagent.jar=7071:/usr/app/prom-jmx-agent-config.yml
           volumeMounts:
             - name: kafka-config-volume-ro
               mountPath: /etc/kafka-config-ro
