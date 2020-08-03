@@ -71,7 +71,9 @@ spec:
             privileged: true
       containers:
         - name: kafka
-          image: wurstmeister/kafka
+          # image: wurstmeister/kafka
+          # image containing javaagent/jmx exporter
+          image: nichemley/fs-kafka-image
           ports:
             - containerPort: 9092
           command:
