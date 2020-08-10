@@ -119,10 +119,6 @@ spec:
             name: kafka-config
         - name: kafka-config-volume-rw
           emptyDir: {}
-  # tolerations:
-  #  - key: "is-kafka-broker-node"
-  #    operator: "Exists"
-  #    effect: "NoSchedule"
   volumeClaimTemplates:
     - metadata:
         name: data
@@ -131,5 +127,7 @@ spec:
           - ReadWriteOnce
         resources:
           requests:
-            storage: 100Gi
+            storage: 375Gi
+        # local SSD
+        storageClassName: local-storage
 EOF
