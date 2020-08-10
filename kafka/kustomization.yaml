@@ -4,6 +4,7 @@ kind: Kustomization
 namespace: kafka
 
 resources:
+  - local-storage.yaml
   - kafka-config.yaml
   - kafka-headless-service.yaml
   - kafka-statefulset-generated.yaml
