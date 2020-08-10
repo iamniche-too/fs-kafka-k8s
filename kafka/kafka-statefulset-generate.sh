@@ -129,5 +129,5 @@ spec:
           requests:
             storage: 375Gi
         # local SSD
-        storageClassName: local-storage
+        storageClassName: fast-disks 
 EOF
