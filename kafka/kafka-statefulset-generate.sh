@@ -119,19 +119,16 @@ spec:
             name: kafka-config
         - name: kafka-config-volume-rw
           emptyDir: {}
-        - name: data
-          hostPath:
-          path: "/mnt/disks/ssd0"
-          nodeSelector:
-            cloud.google.com/gke-local-ssd: "true"
-  #volumeClaimTemplates:
-  #  - metadata:
-  #      name: data
-  #    spec:
-  #      accessModes:
-  #        - ReadWriteOnce
-  #      resources:
-  #        requests:
-  #          storage: 375Gi
-  #      storageClassName: fast-disks 
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            # local ssd is 375 Gb (only)
+            storage: 375Gi
+        # storage class, as defined in the local-provisioner
+        storageClassName: local-scsi 
 EOF
