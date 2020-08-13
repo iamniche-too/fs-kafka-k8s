@@ -121,6 +121,21 @@ spec:
           emptyDir: {}
         - name: data 
           persistentVolumeClaim:
-            # Note: deployed in local provisioner
+            # Note: see PVC definition below 
             claimName: ssd-pv-claim
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ssd-pv-claim
+  namespace: kafka
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      # Note - local-ssd is 375Gb, but only 368Gb is addressable...
+      storage: 368Gi
+  # storage class, as defined in the local-provisioner
+  storageClassName: local-scsi
 EOF
