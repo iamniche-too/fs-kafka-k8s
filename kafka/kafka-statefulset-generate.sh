@@ -119,16 +119,8 @@ spec:
             name: kafka-config
         - name: kafka-config-volume-rw
           emptyDir: {}
-  volumeClaimTemplates:
-    - metadata:
-        name: data
-      spec:
-        accessModes:
-          - ReadWriteOnce
-        resources:
-          requests:
-            # local ssd is 375 Gb (only)
-            storage: 375Gi
-        # storage class, as defined in the local-provisioner
-        storageClassName: local-scsi 
+        - name: data 
+          persistentVolumeClaim:
+            # Note: deployed in local provisioner
+            claimName: ssd-pv-claim
 EOF
