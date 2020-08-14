@@ -6,8 +6,6 @@ source ./export-gcp-credentials.sh
 ./kafka/kafka-statefulset-generate.sh $1 $2
 
 # apply kafka
-#kubectl apply -f ./kafka/local-provisioner.yaml --kubeconfig ./kubeconfig.yaml
-#kubectl apply -f ./kafka/local-storage.yaml --kubeconfig ./kubeconfig.yaml
 kubectl apply -f ./kafka/kafka-config.yaml --kubeconfig ./kubeconfig.yaml
 kubectl apply -f ./kafka/kafka-headless-service.yaml --kubeconfig ./kubeconfig.yaml
 kubectl apply -f ./kafka/kafka-pdb.yaml --kubeconfig ./kubeconfig.yaml
