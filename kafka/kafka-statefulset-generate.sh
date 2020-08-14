@@ -119,13 +119,9 @@ spec:
             name: kafka-config
         - name: kafka-config-volume-rw
           emptyDir: {}
-        - name: data 
-          persistentVolumeClaim:
-            # Note: see PVC definition below 
-            claimName: ssd-pv-claim
   volumeClaimTemplates:
     - metadata:
-        name: ssd-pv-claim
+        name: data 
       spec:
         accessModes:
           - ReadWriteOnce
