@@ -50,6 +50,6 @@ data:
     syncLimit=2
 
     server.0=zookeeper-0.zookeeper-service.kafka.svc.cluster.local:2888:3888:participant
-    #server.1=zookeeper-1.zookeeper-service.kafka.svc.cluster.local:2888:3888:participant
-    #server.2=zookeeper-2.zookeeper-service.kafka.svc.cluster.local:2888:3888:participant
+    server.1=zookeeper-1.zookeeper-service.kafka.svc.cluster.local:2888:3888:participant
+    server.2=zookeeper-2.zookeeper-service.kafka.svc.cluster.local:2888:3888:participant
 
