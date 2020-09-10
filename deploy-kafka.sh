@@ -2,8 +2,8 @@
 source ./export-gcp-credentials.sh
 ./generate-cluster-connection-yaml.sh
 
-# generate the stateful set with the specified number of partitions and number of brokers
-./kafka/kafka-statefulset-generate.sh $1 $2
+# generate the stateful set with the specified number of partitions , number of brokers, batch size
+./kafka/kafka-statefulset-generate.sh $1 $2 $3
 
 # apply kafka
 kubectl apply -f ./kafka/kafka-config.yaml --kubeconfig ./kubeconfig.yaml

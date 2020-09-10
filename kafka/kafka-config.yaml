@@ -38,6 +38,7 @@ data:
     # set the number of partitions to be a multiple (here, a multiple of 1) of the number of brokers
     SEDS+=("s|@NUM_PARTITIONS@|num.partitions=${NUM_PARTITIONS}|")
     SEDS+=("s|@REPLICATION_FACTOR@|default.replication.factor=${REPLICATION_FACTOR}|")
+    SEDS+=("s|@BATCH_SIZE@|message.max.bytes=${BATCH_SIZE}|")
 
     printf '\n%s\n' "${SEDS[@]}" | sed -f - /etc/kafka-config-ro/server.properties > /etc/kafka-config-rw/server.properties
 
@@ -196,4 +197,6 @@ data:
     group.initial.rebalance.delay.ms=0
 
     # maximum batch size, 7.5Mb, overrides default of 1Mb (1000012 bytes)
-    message.max.bytes=7680000
+    # message.max.bytes=7680000
+    @BATCH_SIZE@
+

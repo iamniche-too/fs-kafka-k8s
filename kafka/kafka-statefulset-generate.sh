@@ -2,8 +2,9 @@
 
 NUM_PARTITIONS=$1
 REPLICATION_FACTOR=$2
+BATCH_SIZE=$3
 
-echo "Generating ./kafka/kafka-statefulset-generated.yaml with NUM_PARTITIONS $NUM_PARTITIONS REPLICATION_FACTOR $REPLICATION_FACTOR."
+echo "Generating ./kafka/kafka-statefulset-generated.yaml with NUM_PARTITIONS $NUM_PARTITIONS REPLICATION_FACTOR $REPLICATION_FACTOR BATCH SIZE $BATCH_SIZE."
 
 cat <<EOF > ./kafka/kafka-statefulset-generated.yaml
 ---
@@ -53,6 +54,8 @@ spec:
               value: "$NUM_PARTITIONS" 
             - name: REPLICATION_FACTOR 
               value: "$REPLICATION_FACTOR" 
+            - name: BATCH_SIZE 
+              value: "$BATCH_SIZE" 
           command: ['/bin/bash', '/etc/kafka-config-ro/generate-config.sh']
           volumeMounts:
             - name: kafka-config-volume-ro
