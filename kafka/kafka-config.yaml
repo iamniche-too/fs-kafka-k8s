@@ -179,9 +179,9 @@ data:
     # You can also append an optional chroot string to the urls to specify the
     # root directory for all kafka znodes.
     # 3 ZKs
-    zookeeper.connect=zookeeper-0.zookeeper-service.kafka.svc.cluster.local:2181,zookeeper-1.zookeeper-service.kafka.svc.cluster.local:2181,zookeeper-2.zookeeper-service.kafka.svc.cluster.local:2181
+    #zookeeper.connect=zookeeper-0.zookeeper-service.kafka.svc.cluster.local:2181,zookeeper-1.zookeeper-service.kafka.svc.cluster.local:2181,zookeeper-2.zookeeper-service.kafka.svc.cluster.local:2181
     # 1 ZK 
-    #zookeeper.connect=zookeeper-0.zookeeper-service.kafka.svc.cluster.local:2181
+    zookeeper.connect=zookeeper-0.zookeeper-service.kafka.svc.cluster.local:2181
     
     # Timeout in ms for connecting to zookeeper
     zookeeper.connection.timeout.ms=6000
